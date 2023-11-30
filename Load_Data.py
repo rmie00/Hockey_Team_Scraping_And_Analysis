@@ -15,6 +15,7 @@ Team_Name TEXT,
 Year_Played INTEGER,
 Wins INTEGER,
 Losses INTEGER,
+OT_Losses INTEGER,
 Goals_For INTEGER,
 Goals_Against INTEGER
 );
@@ -46,15 +47,16 @@ while current_page <= 6:
         year = td[1].get_text(strip=True)
         wins = td[2].get_text(strip=True)
         losses = td[3].get_text(strip=True)
+        ot = td[4].get_text(strip=True)
         goals_for = td[6].get_text(strip=True)
         goals_against = td[7].get_text(strip=True)
 
         # Checking if names been collected
-        print(name, year, wins, losses, goals_against, goals_for)
+        print(name, year, wins, losses,ot, goals_against, goals_for)
         # Adding Data To Data Base
         curr.execute(
-            '''INSERT INTO Performance(Team_Name, Year_Played, Wins, Losses, Goals_For, Goals_Against) VALUES (?, ?, ?, ?, ?, ?)''',
-            (name, year, wins, losses, goals_for, goals_against))
+            '''INSERT INTO Performance(Team_Name, Year_Played, Wins, Losses,OT_Losses, Goals_For, Goals_Against) VALUES (?, ?, ?, ?, ?, ?, ?)''',
+            (name, year, wins, losses,ot, goals_for, goals_against))
 
         con.commit()
     current_page += 1
