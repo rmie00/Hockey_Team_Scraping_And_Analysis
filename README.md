@@ -5,5 +5,6 @@ The code for the web scraper is at Load_Data.py and the database is HockeyDataBa
 
 The analysis made so far is minimal however it is available at the My_Analysis.piynb file.
 
-#Streamlit App
+# Streamlit App
+
 Currently building a basic StreamLlit dashaboard app, the code for it is available at the streamlit_app.py file.
