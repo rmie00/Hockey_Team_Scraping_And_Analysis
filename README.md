@@ -4,3 +4,6 @@ In this project, I am working on scraping data from Scrapethissite.com and then 
 The code for the web scraper is at Load_Data.py and the database is HockeyDataBase.sqlite
 
 The analysis made so far is minimal however it is available at the My_Analysis.piynb file.
+
+#Streamlit App
+Currently building a basic StreamLlit dashaboard app, the code for it is available at the streamlit_app.py file.
