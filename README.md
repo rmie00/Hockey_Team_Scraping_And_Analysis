@@ -7,4 +7,4 @@ The analysis made so far is minimal however it is available at the My_Analysis.p
 
 # Streamlit App
 
-Currently building a basic StreamLlit dashaboard app, the code for it is available at the streamlit_app.py file.
+Currently building a basic StreamLlit dashaboard app, the code for it is available at the HockeyDash.py file.
