@@ -9,9 +9,15 @@ import plotly.figure_factory as ff
 
 st.set_page_config(layout='wide',
                    page_title= 'HockeyDash',
-                   page_icon= ':bar-char:')
+                   page_icon= ':ice_hockey_stick_and_puck:')
 
+text1, text2 = st.columns([3,1])
+with text1:
+    st.header('NHL Team Data For Years Between 1990 And 2011')
+with text2:
+    st.text('')
 
+    st.markdown('*The Menu Can Be Accessed By The Side Bar On The Left')
 ###Data Import###
 @st.cache_data
 def load_sqlite(path: str, table: str, index_col: str):
@@ -72,14 +78,7 @@ corre = round(df.corr(), 2)
 mask = np.triu(np.ones_like(corre, dtype= bool))
 corre_mask = corre.mask(mask)
 
-# Side Bar Methods
-def get_unique_year(year):
-    unique_year = df_rst[df_rst['Year_Played'] == year]
-    return unique_year
-
-def get_unique_team(team):
-    unique_team = df_rst[df_rst['Team_Name'] == team]
-    return unique_team
+# Methods
 
 def get_yearly_averages(year):
     yearly_avg = df[df['Year_Played'] == year].mean()
@@ -189,58 +188,6 @@ def plot_bar(dat, metric1, metric2, title):
     )
     st.plotly_chart(fig, use_container_width=True)
 
-def plot_winperc_gauge(team, type):
-    data = df_team.loc[df_team['Team_Name'] == team, type].values[0]
-    colour = 'red' if data < 50 else 'green'
-    fig = go.Figure(go.Indicator(
-        domain={'x': [0, 1], 'y': [0, 1]},
-        value=data,
-        number= {'suffix': '%'},
-        title={'text': type,
-               'size': 28},
-    delta={'reference': 50},
-    mode='gauge+number',
-    gauge={
-        'axis': {'range': [0, 100]},
-        'bar': {'color': colour},
-        'threshold': {
-            'line': {'color': "black", 'width': 4},
-            'thickness': 0.75,
-            'value': data}}
-    ))
-    fig.update_layout(height=500,
-                      width = 500,
-                      paper_bgcolor='white')
-    st.plotly_chart(fig, use_container_width=True)
-
-def plot_num(team, type):
-    data = df_team.loc[df_team['Team_Name'] == team, type].values[0]
-    fig = go.Figure(go.Indicator(
-        mode='number+delta',
-        value=data,
-        domain={'x': [0, 1], 'y': [0, 1]}
-    ))
-    fig.update_layout(height=200,
-                      paper_bgcolor='white')
-    st.plotly_chart(fig, use_container_width=True)
-
-def plot_num_symb(team, type):
-    data = df_team.loc[df_team['Team_Name'] == team, type].values[0]
-    fig = go.Figure(go.Indicator(
-        mode='number+delta',
-        value=data,
-        domain={'x': [0, 1], 'y': [0, 1]}
-    ))
-    fig.update_layout(height=200,
-                      paper_bgcolor='white')
-    st.plotly_chart(fig, use_container_width=True)
-
-def team_df(team):
-    df1 = df.reset_index()
-    df2 = df1[df1['Team_Name'] == team]
-    df2.set_index('Team_Name', inplace=True)
-    return st.dataframe(df2)
-
 
 ### SideBar
 st.sidebar.text('')
@@ -274,7 +221,7 @@ if all_view:
         st.dataframe(df,
                      column_config={'Year_Played': st.column_config.NumberColumn(format='%d')})
 
-    st.subheader('Let View The Top and Bottom Team Averages Compared To League Averages')
+    st.subheader('Lets View The Top and Bottom Team Averages Compared To League Averages')
 
     col_1, col_2 = st.columns(2)
 
@@ -356,7 +303,7 @@ elif valid_yt.any():
         else:
             compare_gauge('+-', df_unique, df_year_avg, prefix="+", range=[0, 300])
 
-    col_1, col_2 = st.columns(2)
+    col_1, col_2 = st.columns([55,45])
     with col_1:
         st.subheader(f'League Table For The Year {year_selected}')
         league_table(year_selected)
