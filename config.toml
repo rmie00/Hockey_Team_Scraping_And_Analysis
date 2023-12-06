@@ -2,3 +2,5 @@
 runOnSave = true
 [deprecation]
 showPyplotGlobalUse = false
+[theme]
+light
