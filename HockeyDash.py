@@ -135,7 +135,7 @@ def compare_num(type, avg, df, prefix= None):
     st.plotly_chart(fig, use_container_width=True)
 
 def league_table(year):
-    years = df[df['Year_Played'] == year].reset_index(drop=False).sort_values(by = 'Wins', ascending=True)
+    years = df[df['Year_Played'] == year].reset_index(drop=False).sort_values(by = 'Wins', ascending=False)
     positions = list(range(1, len(years)+1))
     fig = go.Figure(data=[go.Table(
         columnwidth= [40] + [60]*len(years.columns),
