@@ -1,0 +1,6 @@
+[server]
+runOnSave = true
+[deprecation]
+showPyplotGlobalUse = false
+[theme]
+base = "light"
